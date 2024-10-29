@@ -1,7 +1,7 @@
 create database stockcar;
-use stockcar
-drop table voiture;
-create table voiture (
+use stockcar;
+drop table if exists Voiture;
+create table Voiture (
 	id integer primary key auto_increment,	
 	marque varchar(30) not null,
 	modele varchar(30) not null,
@@ -12,8 +12,7 @@ create table voiture (
 	prix integer
 );
 
-
-insert into voiture (marque, modele, finition, carburant, km, annee, prix) values
+insert into Voiture (marque, modele, finition, carburant, km, annee, prix) values
 ('Citroën', 'C4 Picasso', 'Feel', 'D', 78000, 2017, 15500),
 ('Peugeot', '3008', 'Allure', 'D', 4, 2020, 38000),
 ('Renault', 'Mégane', 'Dynamique', 'E', 133000, 2007, 3100),
@@ -23,3 +22,6 @@ insert into voiture (marque, modele, finition, carburant, km, annee, prix) value
 ('Renault', 'VelSatis', 'Initiale', 'D', 174000, 2006, 3000),
 ('Volvo', 'V60', 'Inscription', 'D', 80674, 2016, 12890),
 ('DS', 'DS5', 'Sport chic', 'H', 111111, 2018, 14590);
+
+create user 'stockcar'@'%' identified by 'stockcar';
+grant all on stockcar.* to 'stockcar'@'%';

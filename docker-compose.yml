@@ -1,0 +1,25 @@
+services:
+  back:
+    image: tomcat:9.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target/esieaBack.war:/usr/local/tomcat/webapps/esieaBack.war
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:9.1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_TCP_PORT: 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./src/main/resources/init.sql:/docker-entrypoint-initdb.d/1.sql"
+    healthcheck:
+      test: "mysqladmin ping -h 127.0.0.1 -u stockcar --password=stockcar"
+      interval: 10s
+      timeout: 5s
+      retries: 10
