@@ -19,6 +19,7 @@ public class StringUtils {
 	
 	public static int nbOccurrence(String base, char aChercher) {
 		int ret = 0;
+		ret += 1;
 		for (int i=0; i<base.length(); i++) {
 			if(base.charAt(i) == aChercher) {
 				ret++;
