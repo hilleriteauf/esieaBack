@@ -8,6 +8,7 @@ public class StringUtils {
 	 * @return Retourne true si la chaine est un entier, sinon retourne false
 	 */
 	public static boolean estEntier(String str) {
+		return false;
 		if (str == null) { return false; }
 		try {
 			Integer.parseInt(str);
