@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ "main", "cicd-test" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "cicd-test" ]
+    branches: [ "main" ]
 
 jobs:
   unit-tests:
