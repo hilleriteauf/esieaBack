@@ -1,6 +1,8 @@
 package esiea.metier;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,5 +65,28 @@ class VoitureTest {
 
     @Test
     void getTypeDonnee() {
+        assertEquals("string", Voiture.getTypeDonnee("marque"), "marque is a string");
+        assertEquals("string", Voiture.getTypeDonnee("modele"), "modele is a string");
+        assertEquals("string", Voiture.getTypeDonnee("finition"), "finition is a string");
+
+        assertEquals("entier", Voiture.getTypeDonnee("id"), "id is an int");
+        assertEquals("entier", Voiture.getTypeDonnee("annee"), "annee is an int");
+        assertEquals("entier", Voiture.getTypeDonnee("km"), "km is an int");
+        assertEquals("entier", Voiture.getTypeDonnee("prix"), "prix is an int");
+
+        assertEquals("", Voiture.getTypeDonnee("test"), "test does not exist");
+    }
+
+    @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class CarburantTest {
+
+        @Test
+        void get() {
+            assertEquals(Voiture.Carburant.ESSENCE, Voiture.Carburant.get("E"), "ESSENCE is a carburant");
+            assertEquals(Voiture.Carburant.DIESEL, Voiture.Carburant.get("D"), "DIESEL is a carburant");
+            assertEquals(Voiture.Carburant.ELECTRIQUE, Voiture.Carburant.get("W"), "ELECTRIQUE is a carburant");
+            assertEquals(Voiture.Carburant.HYBRIDE, Voiture.Carburant.get("H"), "HYBRIDE is a carburant");
+        }
     }
 }
