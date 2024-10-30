@@ -59,7 +59,7 @@ jobs:
         run: docker-compose -f "docker-compose.yml" down
       - name: Archive test results
         if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: api-test-results
-            path: target/bruno-reports/
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-results
+          path: target/bruno-reports/
