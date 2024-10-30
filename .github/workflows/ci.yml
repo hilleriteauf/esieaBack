@@ -55,7 +55,7 @@ jobs:
         run: bru run
         working-directory: test/Voitures
       - name: Run integration tests with Bruno
-        run: bru run --output-file bruno.json
+        run: bru run --output bruno.json
         working-directory: test/Voitures
 
       - name: Archive test results
