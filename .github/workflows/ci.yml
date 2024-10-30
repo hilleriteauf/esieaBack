@@ -55,7 +55,7 @@ jobs:
         run: bru run
         working-directory: test/Voitures
       - name: Run integration tests with Bruno
-        run: bru run --output bruno.json
+        run: bru run --output result.json
         working-directory: test/Voitures
 
       - name: Archive test results
@@ -63,4 +63,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: api-test-results
-          path: ${{ github.workspace }}/test/Voitures/bruno.json
+          path: ${{ github.workspace }}/test/Voitures/result.json
