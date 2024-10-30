@@ -55,8 +55,7 @@ jobs:
         run: bru run
         working-directory: test/Voitures
       - name: Run integration tests with Bruno
-        run: bru run --output result.json
-        working-directory: test/Voitures
+        run: bru run --output test/Voitures/result.json
 
       - name: Archive test results
         if: always()
