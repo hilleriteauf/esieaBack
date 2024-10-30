@@ -50,7 +50,8 @@ jobs:
         run: npm install -g @usebruno/cli
 
       - name: Run integration tests with Bruno
-        run: bru run --output test/Voitures/result.json
+        run: bru run --output result.json
+        working-directory: test/Voitures
 
       - name: Archive test results
         if: always()
