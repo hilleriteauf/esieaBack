@@ -1,0 +1,186 @@
+{
+  "name": "Fiat Multipla",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Voitures",
+      "items": [
+        {
+          "type": "http",
+          "name": "Delete Voiture",
+          "seq": 7,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/del",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"id\": 10\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should be able to delete a car.\", function() {\n  expect(res.getStatus()).to.equal(200);\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Edit Voiture",
+          "seq": 6,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/update",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"id\": 10,\n  \"marque\": \"Ford\",\n  \"modele\": \"Fista\",\n  \"finition\": \"Titanium\",\n  \"carburant\": \"D\",\n  \"km\": 50000,\n  \"annee\": 2018,\n  \"prix\": 15000\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should be able to edit a car.\", async function() {\n  expect(res.getStatus()).to.equal(200);\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get Single Voiture",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/get/1",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should be able to view a single car.\", function() {\n  const data = res.getBody();\n  expect(res.getStatus()).to.equal(200);\n  expect(data).to.be.an(\"object\");\n  expect(data.voiture).to.be.a(\"string\"); \n  \n  const car = JSON.parse(data.voiture);\n\n  expect(car).to.be.an(\"object\");\n  expect(car).to.have.property(\"marque\");\n  expect(car).to.have.property(\"modele\");\n  expect(car).to.have.property(\"finition\");\n  expect(car).to.have.property(\"km\");\n  expect(car).to.have.property(\"carburant\");\n  expect(car).to.have.property(\"annee\");\n  expect(car).to.have.property(\"prix\");\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get Voitures",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/get/all",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should be able to view cars.\", function() {\n  const data = res.getBody()\n  expect(res.getStatus()).to.equal(200);\n  expect(data).to.be.an(\"object\");\n  expect(data.voitures).to.be.an(\"array\");\n  data.voitures.forEach(carString => {\n    const car = JSON.parse(carString);\n    expect(car).to.have.property(\"modele\");\n    expect(car).to.have.property(\"finition\");\n    expect(car).to.have.property(\"km\");\n    expect(car).to.have.property(\"carburant\");\n    expect(car).to.have.property(\"annee\");\n    expect(car).to.have.property(\"prix\");\n  });\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Post Voiture",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/add",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"id\": 10,\n  \"marque\": \"Ford\",\n  \"modele\": \"Focus\",\n  \"finition\": \"Titanium\",\n  \"carburant\": \"D\",\n  \"km\": 50000,\n  \"annee\": 2018,\n  \"prix\": 15000\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should be able to create a car.\", async function() {\n  expect(res.getStatus()).to.equal(200);\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get Single voiture fail",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/get/6969",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should get a 404 error message.\", function() {\n  const data = res.getBody();\n  expect(res.getStatus()).to.equal(200);\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get New Voiture",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8080/esieaBack/rest/voiture/get/10",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"Should be able to view a single car.\", function() {\n  const data = res.getBody();\n  expect(res.getStatus()).to.equal(200);\n  expect(data).to.be.an(\"object\");\n  expect(data.voiture).to.be.a(\"string\"); \n  \n  const car = JSON.parse(data.voiture);\n\n  expect(car).to.be.an(\"object\");\n  expect(car).to.have.property(\"marque\");\n  expect(car).to.have.property(\"modele\");\n  expect(car).to.have.property(\"finition\");\n  expect(car).to.have.property(\"km\");\n  expect(car).to.have.property(\"carburant\");\n  expect(car).to.have.property(\"annee\");\n  expect(car).to.have.property(\"prix\");\n});",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "Fiat Multipla",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
