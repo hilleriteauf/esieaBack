@@ -1,0 +1,30 @@
+meta {
+  name: Post Voiture
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/esieaBack/rest/voiture/add
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": 10,
+    "marque": "Ford",
+    "modele": "Focus",
+    "finition": "Titanium",
+    "carburant": "D",
+    "km": 50000,
+    "annee": 2018,
+    "prix": 15000
+  }
+}
+
+tests {
+  test("Should be able to create a car.", async function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

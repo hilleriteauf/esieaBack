@@ -1,0 +1,31 @@
+meta {
+  name: Get New Voiture
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/esieaBack/rest/voiture/get/10
+  body: none
+  auth: none
+}
+
+tests {
+  test("Should be able to view a single car.", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+    expect(data).to.be.an("object");
+    expect(data.voiture).to.be.a("string"); 
+    
+    const car = JSON.parse(data.voiture);
+  
+    expect(car).to.be.an("object");
+    expect(car).to.have.property("marque");
+    expect(car).to.have.property("modele");
+    expect(car).to.have.property("finition");
+    expect(car).to.have.property("km");
+    expect(car).to.have.property("carburant");
+    expect(car).to.have.property("annee");
+    expect(car).to.have.property("prix");
+  });
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Get Voitures
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/esieaBack/rest/voiture/get/all
+  body: none
+  auth: none
+}
+
+tests {
+  test("Should be able to view cars.", function() {
+    const data = res.getBody()
+    expect(res.getStatus()).to.equal(200);
+    expect(data).to.be.an("object");
+    expect(data.voitures).to.be.an("array");
+    data.voitures.forEach(carString => {
+      const car = JSON.parse(carString);
+      expect(car).to.have.property("modele");
+      expect(car).to.have.property("finition");
+      expect(car).to.have.property("km");
+      expect(car).to.have.property("carburant");
+      expect(car).to.have.property("annee");
+      expect(car).to.have.property("prix");
+    });
+  });
+}
