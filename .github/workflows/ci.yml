@@ -39,6 +39,9 @@ jobs:
           cache: maven
       - name: Install Bruno CLI
         run: npm install -g @usebruno/cli
+      - name: start the back-end
+        run: docker-compose up -d
+        working-directory: ./
       - name: Run integration tests with Bruno
         run: bru run
         working-directory: test/Voitures
