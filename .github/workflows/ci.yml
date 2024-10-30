@@ -46,14 +46,9 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Install dependencies
-        run: npm install
       - name: Install Bruno CLI
         run: npm install -g @usebruno/cli
-        working-directory: ./
-      - name: Run integration tests with Bruno
-        run: bru run
-        working-directory: test/Voitures
+
       - name: Run integration tests with Bruno
         run: bru run --output test/Voitures/result.json
 
@@ -62,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: api-test-results
-          path: ${{ github.workspace }}/test/Voitures/result.json
+          path: test/Voitures/result.json
