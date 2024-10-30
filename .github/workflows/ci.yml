@@ -54,13 +54,13 @@ jobs:
       - name: Run integration tests with Bruno
         run: bru run
         working-directory: test/Voitures
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f "docker-compose.yml" down
-        id: integration_tests
+      - name: Run integration tests with Bruno
+        run: bru run --output-file test-results.json
+        working-directory: test/Voitures
+
       - name: Archive test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: api-test-results
-          path: ${{ steps.integration_tests.outputs.results }}
+          path: test/Voitures/test-results.json
