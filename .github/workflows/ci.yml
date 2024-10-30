@@ -28,6 +28,7 @@ jobs:
 
   integration-tests:
     runs-on: ubuntu-latest
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -36,8 +37,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - name: Install Bruno CLI
+        run: npm install -g @usebruno/cli
       - name: Run integration tests with Bruno
-        run: bru run # Commande pour exécuter vos tests d'intégration avec Bruno
+        run: bru run
         working-directory: test/Voitures
       - name: Archive integration test results
         if: always()
